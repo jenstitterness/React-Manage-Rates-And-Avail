@@ -11,41 +11,44 @@ import React, {
   View
 } from 'react-native';
 
-class ManageRoomsAndRates extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
-    );
-  }
-}
+var Calendar = require('react-native-calendar-android'),
+  moment = require('moment');
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    marginTop: 30,
+    // justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  header: {
+    fontSize: 24,
+    fontWeight: "800"
+  }
 });
+
+var today = moment().format("YYYY/MM/DD");
+
+class ManageRoomsAndRates extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+      <Text style={styles.header}>Manage Rates And Availability</Text>
+      <Calendar
+        width={300}
+        topbarVisible={true}
+        arrowColor="#dadafc"
+        showDate="all"
+        currentDate={[ today ]}
+        selectionMode="multiple"
+        selectionColor="#dadafc"
+        onDateChange={(data) => {
+          console.log(data);
+        }} />
+      </View>
+    );
+  }
+}
 
 AppRegistry.registerComponent('ManageRoomsAndRates', () => ManageRoomsAndRates);
